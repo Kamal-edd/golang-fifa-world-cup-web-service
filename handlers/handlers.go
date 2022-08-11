@@ -53,6 +53,11 @@ func AddNewWinner(res http.ResponseWriter, req *http.Request) {
 		res.WriteHeader(http.StatusUnauthorized)
 	} else {
 		//Create an else block for this same conditional.
+		//Now let's read from the payload of the POST request
+		//and add a new winner. Inside the else block, before
+		//writing the status code, call the data.AddNewWinner()
+		//method, passing it req.Body as argument
+		data.AddNewWinner(req.Body)
 		//Inside this block, call res.WriteHeader() passing it
 		//the argument http.StatusCreated to set the response
 		//status code to 201.
