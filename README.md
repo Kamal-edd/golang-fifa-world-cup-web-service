@@ -20,6 +20,38 @@ the `go run server.go` command.
 Start the server with `go run server.go` and then
 use the example commands printed to the console to
 test the program.
+like so
+```
+go run server.go
+
+
+        GETting:
+
+        curl -i http://localhost:8000/
+        curl -i http://localhost:8000/winners
+        curl -i http://localhost:8000/winners?year=1970
+        curl -i http://localhost:8000/winners?year=banana
+
+        POSTing with NO access token:
+
+        curl -i -X POST -d "{\"country\":\"Croatia\", \"year\": 2030}" http://localhost:8000/winners
+
+        POSTing with valid access token:
+
+        curl -i -X POST -H "X-ACCESS-TOKEN: 5577006791947779410" -d "{\"country\":\"Croatia\", \"year\": 2030}" http://localhost:8000/winners
+
+        Then check for the newly added winner
+
+        curl -i http://localhost:8000/winners
+
+        POSTing with invalid data:
+
+        curl -i -X POST -H "X-ACCESS-TOKEN: 5577006791947779410" -d "{\"country\":\"Russia\", \"year\": 1984}" http://localhost:8000/winners
+
+        POSTing with invalid method:
+
+        curl -i -X PUT -d "{\"country\":\"Russia\", \"year\": 2030}" http://localhost:8000/winners
+```
 
 ### Running with Docker
 
