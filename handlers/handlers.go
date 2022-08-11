@@ -3,6 +3,7 @@ package handlers
 import (
 	"golang-fifa-world-cup-web-service/data"
 	"net/http"
+	"strconv"
 )
 
 // RootHandler returns an empty body status code
@@ -14,6 +15,10 @@ func RootHandler(res http.ResponseWriter, req *http.Request) {
 func ListWinners(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Content-Type", "application/json")
 	year := req.URL.Query().Get("year")
+	if year == "banana" { //this just a joke
+		res.WriteHeader(http.StatusBadRequest)
+		return
+	}
 	if year == "" {
 		winners, err := data.ListAllJSON()
 		//fmt.Print(winners)
@@ -23,12 +28,18 @@ func ListWinners(res http.ResponseWriter, req *http.Request) {
 		}
 		res.Write(winners)
 	} else {
+		year_nbr, err := strconv.Atoi(year)
+		if err != nil && (year_nbr > 1930 || year_nbr < 2022) {
+			res.WriteHeader(http.StatusBadRequest)
+			return
+		}
 		filteredWinners, err := data.ListAllByYear(year)
 		if err != nil {
 			res.WriteHeader(http.StatusBadRequest)
 			return
 		}
 		res.Write(filteredWinners)
+
 	}
 
 }
