@@ -16,6 +16,7 @@ func ListWinners(res http.ResponseWriter, req *http.Request) {
 	year := req.URL.Query().Get("year")
 	if year == "" {
 		winners, err := data.ListAllJSON()
+		//fmt.Print(winners)
 		if err != nil {
 			res.WriteHeader(http.StatusInternalServerError)
 			return
@@ -50,6 +51,12 @@ func AddNewWinner(res http.ResponseWriter, req *http.Request) {
 		//the argument http.StatusUnauthorized to set the response
 		//status code to 401.
 		res.WriteHeader(http.StatusUnauthorized)
+	} else {
+		//Create an else block for this same conditional.
+		//Inside this block, call res.WriteHeader() passing it
+		//the argument http.StatusCreated to set the response
+		//status code to 201.
+		res.WriteHeader(http.StatusCreated)
 	}
 }
 
