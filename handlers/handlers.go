@@ -108,6 +108,11 @@ func WinnersHandler(res http.ResponseWriter, req *http.Request) {
 		//This case should call the function AddNewWinner passing
 		//it the arguments res and req in this order.
 		AddNewWinner(res, req)
+	//Lastly, add a default case to switch/case
+	default:
+		//which calls res.WriteHeader passing it the argument
+		//http.StatusMethodNotAllowed. This will create a response with the status code of 405.
+		res.WriteHeader(http.StatusMethodNotAllowed)
 	}
 
 }
