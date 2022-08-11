@@ -95,5 +95,20 @@ func AddNewWinner(res http.ResponseWriter, req *http.Request) {
 
 // WinnersHandler is the dispatcher for all /winners URL
 func WinnersHandler(res http.ResponseWriter, req *http.Request) {
+	//Find the WinnersHandler function. Inside this function,
+	//create a switch/case statement that switches on req.Method.
+	switch req.Method {
+	//Add a single case for http.MethodGet.
+	case http.MethodGet:
+		//This case should call the function ListWinners passing
+		//it the arguments res and req in this order.
+		ListWinners(res, req)
+		Dispatch POST Requests
+
+	//Add a second case statement. This time, for http.MethodPost. 
+	case http.MethodPost:
+	//This case should call the function AddNewWinner passing it the arguments res and req in this order.
+
+	}
 
 }
