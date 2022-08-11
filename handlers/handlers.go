@@ -34,7 +34,23 @@ func ListWinners(res http.ResponseWriter, req *http.Request) {
 
 // AddNewWinner adds new winner to the list
 func AddNewWinner(res http.ResponseWriter, req *http.Request) {
-
+	//Find the AddNewWinner function. Inside this function,
+	//call req.Header.Get() passing it the argument "X-ACCESS-TOKEN"
+	//to read from this request header. Assign the result to
+	//a new variable called accessToken.
+	accessToken := req.Header.Get("X-ACCESS-TOKEN")
+	//Next, call the data.IsAccessTokenValid() function,
+	//passing it accessToken as argument and store the result
+	//in a new variable called isTokenValid.
+	isTokenValid := data.IsAccessTokenValid(accessToken)
+	//Using this variable, create an if statement which uses
+	//!isTokenValid (notice the negation character !) as the condition.
+	if !isTokenValid {
+		//On the if block, call res.WriteHeader() passing it
+		//the argument http.StatusUnauthorized to set the response
+		//status code to 401.
+		res.WriteHeader(http.StatusUnauthorized)
+	}
 }
 
 // WinnersHandler is the dispatcher for all /winners URL
