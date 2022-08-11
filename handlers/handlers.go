@@ -103,12 +103,11 @@ func WinnersHandler(res http.ResponseWriter, req *http.Request) {
 		//This case should call the function ListWinners passing
 		//it the arguments res and req in this order.
 		ListWinners(res, req)
-		Dispatch POST Requests
-
-	//Add a second case statement. This time, for http.MethodPost. 
+	//Add a second case statement. This time, for http.MethodPost.
 	case http.MethodPost:
-	//This case should call the function AddNewWinner passing it the arguments res and req in this order.
-
+		//This case should call the function AddNewWinner passing
+		//it the arguments res and req in this order.
+		AddNewWinner(res, req)
 	}
 
 }
