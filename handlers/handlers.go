@@ -57,7 +57,19 @@ func AddNewWinner(res http.ResponseWriter, req *http.Request) {
 		//and add a new winner. Inside the else block, before
 		//writing the status code, call the data.AddNewWinner()
 		//method, passing it req.Body as argument
-		data.AddNewWinner(req.Body)
+		err := data.AddNewWinner(req.Body)
+		//Assign the return value of calling the data.AddNewWinner()
+		//method to a new variable called err. Then, create an
+		//if statement which checks if err != nil.
+		if err != nil { //On the if block of this statement,
+			//call res.WriteHeader() passing it the argument
+			//http.StatusUnprocessableEntity to respond
+			//with a status code of 422,
+			res.WriteHeader(http.StatusUnprocessableEntity)
+			//and on the very next line
+			return
+			//add an empty return statement.
+		}
 		//Inside this block, call res.WriteHeader() passing it
 		//the argument http.StatusCreated to set the response
 		//status code to 201.
